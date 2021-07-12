@@ -1,14 +1,16 @@
 <template>
   <main>
-      <div class="card_movie">
-          titolo, titolo-originale, lingua, voto
+      <div v-for="(movie, item) in movieArray" :key="item" class="card_movie">
+          {{movie.title}}
+          <!-- titolo, titolo-originale, lingua, voto -->
       </div>
   </main>
 </template>
 
 <script>
 export default {
-    name: 'Main'
+    name: 'Main',
+    props:['movieArray']
 
 }
 </script>
