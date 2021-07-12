@@ -44,7 +44,7 @@ export default{
         })
         .then(response => {
           console.log(response.data.results);
-          this.movieArray = response.data
+          this.movieArray = response.data.results
           // console.log(this.movieArray);
         })
         .catch(error =>{
