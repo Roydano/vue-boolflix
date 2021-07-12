@@ -1,17 +1,20 @@
 <template>
   <div class="search_bar">
       <h1>Boolflix</h1>
-      <form action="">
-          <input type="text">
-          <button>Cerca</button>
-      </form>
+      <input type="text" v-model.trim="textSearch">
+      <button @click="$emit('search', textSearch)">Cerca</button>
   </div>
 </template>
 
 <script>
 export default {
-    name: 'Header'
+    name: 'Header',
 
+    data(){
+        return{
+            textSearch: ''
+        }
+    },
 }
 </script>
 
