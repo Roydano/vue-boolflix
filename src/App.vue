@@ -26,7 +26,7 @@ export default{
       urlApiSeries: 'https://api.themoviedb.org/3/search/tv?',
       movieArray:[],
       seriesArray:[],
-      textSearch: ''
+      textSearch: '',
 
     }
   },
