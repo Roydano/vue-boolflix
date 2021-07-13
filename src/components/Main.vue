@@ -14,6 +14,13 @@
                     <p>Titolo in originale: {{movie.original_title}}</p>
                     <p>Lingua: {{movie.original_language}} <img :src="'https://www.countryflags.io/' + changeIdLang(movie.original_language) + '/flat/64.png'" :alt='movie.original_language' class="flag"></p>
                     <p>Voto: {{movie.vote_average}}</p>
+                    <div class="star">
+                        <i class="fas fa-star" :class="movie.vote_average > 1 ? 'yellow' : 'grey'"></i>
+                        <i class="fas fa-star" :class="movie.vote_average >= 4 ? 'yellow' : 'grey'"></i>
+                        <i class="fas fa-star" :class="movie.vote_average >= 6 ? 'yellow' : 'grey'"></i>
+                        <i class="fas fa-star" :class="movie.vote_average >= 8 ? 'yellow' : 'grey'"></i>
+                        <i class="fas fa-star" :class="movie.vote_average > 9 ? 'yellow' : 'grey'"></i>
+                    </div>
                 </div>
             </div>
         </div>
@@ -29,6 +36,13 @@
                     <p>Titolo in originale: {{series.original_name}}</p>
                     <p>Lingua: {{series.original_language}} <img :src="'https://www.countryflags.io/' + changeIdLang(series.original_language) + '/flat/64.png'" :alt='series.original_language' class="flag"></p>
                     <p>Voto: {{series.vote_average}}</p>
+                    <div class="star">
+                        <i class="fas fa-star" :class="series.vote_average > 1 ? 'yellow' : 'grey'"></i>
+                        <i class="fas fa-star" :class="series.vote_average >= 4 ? 'yellow' : 'grey'"></i>
+                        <i class="fas fa-star" :class="series.vote_average >= 6 ? 'yellow' : 'grey'"></i>
+                        <i class="fas fa-star" :class="series.vote_average >= 8 ? 'yellow' : 'grey'"></i>
+                        <i class="fas fa-star" :class="series.vote_average > 9 ? 'yellow' : 'grey'"></i>
+                    </div>
                     
                 </div>
             </div>
@@ -44,7 +58,7 @@ export default {
 
     data(){
         return{
-            imgUrl: 'https://image.tmdb.org/t/p/w342/'
+            imgUrl: 'https://image.tmdb.org/t/p/w342/', 
 
         }
     },
@@ -55,7 +69,8 @@ export default {
             if( lang == 'ja' ) return "jp";
 
             return lang;
-        }
+        },
+
     }
 
 }
@@ -65,5 +80,9 @@ export default {
     .flag{
         width: 2%;
     }
+    .yellow{
+        color: red;
+    }
+    
 
 </style>
