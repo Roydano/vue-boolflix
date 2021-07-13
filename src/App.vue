@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Header @search="getMovie"/>
-    <Main :movieArray="movieArray"/>
+    <Main :movieArray="movieArray" :seriesArray="seriesArray"/>
 
   </div>
 </template>
@@ -23,7 +23,9 @@ export default{
   data(){
     return{
       urlApi: 'https://api.themoviedb.org/3/search/movie?',
+      urlApiSeries: 'https://api.themoviedb.org/3/search/tv?',
       movieArray:[],
+      seriesArray:[],
       textSearch:''
 
     }
@@ -34,6 +36,7 @@ export default{
     getMovie(searchText){
       this.textSearch = searchText
 
+      // chiamata film
       axios
         .get(this.urlApi, {
           params:{
@@ -45,6 +48,24 @@ export default{
         .then(response => {
           console.log(response.data.results);
           this.movieArray = response.data.results
+          // console.log(this.movieArray);
+        })
+        .catch(error =>{
+          console.log('Errore ', error);
+        })
+
+      //chiamata serie tv
+      axios
+        .get(this.urlApiSeries, {
+          params:{
+            api_key: 'c81548416aaaa14e591c85d4db9fdc1e',
+            language: 'it-IT',
+            query: this.textSearch
+          }
+        })
+        .then(response => {
+          console.log(response.data.results);
+          this.seriesArray = response.data.results
           // console.log(this.movieArray);
         })
         .catch(error =>{
