@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Header @search="getMovie"/>
-    <Main :movieArray="movieArray" :seriesArray="seriesArray"/>
+    <Main :movieArray="movieArray" :seriesArray="seriesArray" :searching="textSearch"/>
 
   </div>
 </template>
@@ -26,7 +26,7 @@ export default{
       urlApiSeries: 'https://api.themoviedb.org/3/search/tv?',
       movieArray:[],
       seriesArray:[],
-      textSearch:''
+      textSearch: ''
 
     }
   },
@@ -46,7 +46,7 @@ export default{
           }
         })
         .then(response => {
-          console.log(response.data.results);
+          // console.log(response.data.results);
           this.movieArray = response.data.results
           // console.log(this.movieArray);
         })
@@ -64,13 +64,15 @@ export default{
           }
         })
         .then(response => {
-          console.log(response.data.results);
+          // console.log(response.data.results);
           this.seriesArray = response.data.results
           // console.log(this.movieArray);
         })
         .catch(error =>{
           console.log('Errore ', error);
         })
+
+        console.log(this.textSearch);
     }
 
   }
