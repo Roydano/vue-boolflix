@@ -3,14 +3,14 @@
         <img :src='imgUrl + movie.poster_path' alt="">
         
         <div class="card">
-            <p>Titolo: {{movie.title == null ? movie.name : movie.title}}</p>
-            <p>Titolo in originale: {{movie.original_title == null ? movie.original_name : movie.original_title}}</p>
-            <p>Lingua: {{movie.original_language}} <img :src="'https://www.countryflags.io/' + changeIdLang(movie.original_language) + '/flat/64.png'" :alt='movie.original_language' class="flag"></p>
+            <p><span>Titolo:</span> {{movie.title == null ? movie.name : movie.title}}</p>
+            <p><span>Titolo in originale:</span> {{movie.original_title == null ? movie.original_name : movie.original_title}}</p>
+            <p><span>Lingua:</span> {{movie.original_language}} <img :src="'https://www.countryflags.io/' + changeIdLang(movie.original_language) + '/flat/64.png'" :alt='movie.original_language' class="flag"></p>
              <div>
-                <p v-if="movie.overview != '' ">Descrizione: {{movie.overview}}</p>
-                <p v-else>Nessuna descrizione presente</p>
+                <p class="overview py-1" v-if="movie.overview != '' "><span>Descrizione:</span> {{movie.overview}}</p>
+                <p v-else><span>Nessuna descrizione presente</span></p>
             </div>
-            <p>Voto: {{movie.vote_average}} <Star :star="movie.vote_average"/></p>
+            <p><span>Voto:</span> {{movie.vote_average}} <Star :star="movie.vote_average"/></p>
         </div>
         
     </div>
@@ -19,15 +19,15 @@
         <h4 class="text-center pt-3">{{movie.title == null ? movie.name : movie.title}}</h4>
 
         <div class="card">
-            <p>Titolo: {{movie.title == null ? movie.name : movie.title}}</p>
-            <p>Titolo in originale: {{movie.original_title == null ? movie.original_name : movie.original_title}}</p>
-            <p>Lingua: {{movie.original_language}} <img :src="'https://www.countryflags.io/' + changeIdLang(movie.original_language) + '/flat/64.png'" :alt='movie.original_language' class="flag"></p>
+            <p><span>Titolo:</span> {{movie.title == null ? movie.name : movie.title}}</p>
+            <p><span>Titolo in originale:</span> {{movie.original_title == null ? movie.original_name : movie.original_title}}</p>
+            <p><span>TLingua:</span> {{movie.original_language}} <img :src="'https://www.countryflags.io/' + changeIdLang(movie.original_language) + '/flat/64.png'" :alt='movie.original_language' class="flag"></p>
             <div>
-                <p v-if="movie.overview != '' ">Descrizione: {{movie.overview}}</p>
-                <p v-else>Nessuna descrizione presente</p>
+                <p class="overview py-1" v-if="movie.overview != '' "><span>Descrizione:</span> {{movie.overview}}</p>
+                <p v-else><span>Nessuna descrizione presente.</span></p>
             </div>
             
-            <p>Voto: {{movie.vote_average}} <Star :star="movie.vote_average"/></p>
+            <p><span>Voto:</span> {{movie.vote_average}} <Star :star="movie.vote_average"/></p>
 
         </div>
 
@@ -72,6 +72,7 @@ export default {
 
 
     .img_card{
+        border-radius: 5px;
         position: relative;
         height: 450px;
         width: 300px;
@@ -83,19 +84,40 @@ export default {
         
 
         img{
+            border-radius: 5px;
             height: 100%;
             width: 100%;
         }
 
         .card{
+            border-radius: 5px;
             display: none;
+            opacity: 0;
             position: absolute;
             top: 0;
             left: 0;
             height: 450px;
             width: 300px;
             padding: 10px;
-            background-color: yellow;
+            background-color: black;
+            color: white;
+            transition: opacity 1s;
+
+            &:hover{
+                opacity: 1;
+            }
+
+            span{
+                font-weight: bold;
+                color: red;
+            }
+
+            .overview{
+                max-height: 170px;
+                overflow-y: auto;
+                background-color: rgb(49, 44, 44);
+                border-bottom: 1px solid grey;
+            }
 
             .flag{
             width: 10%;
@@ -110,7 +132,7 @@ export default {
         background-size: contain;
         background-repeat: no-repeat;
         background-position: center;
-        background-color: rgb(59, 59, 59);
+        background-color: rgb(54, 54, 54);
     }
     
     
