@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Header @search="getMovie"/>
-    <Main :movieArray="movieArray" :seriesArray="seriesArray" :searching="textSearch"/>
+    <Main :movieArray="movieArray" :seriesArray="seriesArray" :searching="textSearch" :trendArray="trendArray"/>
 
   </div>
 </template>
@@ -26,12 +26,34 @@ export default{
       urlApiSeries: 'https://api.themoviedb.org/3/search/tv?',
       movieArray:[],
       seriesArray:[],
+      trendArray:[],
       textSearch: '',
 
     }
   },
 
+  created(){
+    this.trendFilm()
+  //  console.log(this.trendArray)
+    
+  },
+
   methods:{
+
+    trendFilm(){
+      axios
+        .get('https://api.themoviedb.org/3/trending/all/day?api_key=c81548416aaaa14e591c85d4db9fdc1e&language=it-IT')
+         .then(response => {
+           // console.log(response.data.results);
+           this.trendArray = response.data.results
+          //  console.log(this.trendArray);
+         })
+         .catch(error =>{
+           console.log('Errore ', error);
+        })
+
+        
+    },
 
     getMovie(searchText){
       this.textSearch = searchText

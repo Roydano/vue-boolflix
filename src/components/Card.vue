@@ -77,6 +77,7 @@ export default {
         height: 450px;
         width: 300px;
         box-shadow: 1px 1px 1px 1px black;
+        cursor: pointer;
         
         &:hover .card{
             display: block;
@@ -99,7 +100,7 @@ export default {
             height: 450px;
             width: 300px;
             padding: 10px;
-            background-color: black;
+            background-color: rgba(0, 0, 0, 0.8);
             color: white;
             transition: opacity 1s;
 
@@ -115,7 +116,6 @@ export default {
             .overview{
                 max-height: 170px;
                 overflow-y: auto;
-                background-color: rgb(49, 44, 44);
                 border-bottom: 1px solid grey;
             }
 
@@ -133,6 +133,7 @@ export default {
         background-repeat: no-repeat;
         background-position: center;
         background-color: rgb(54, 54, 54);
+        cursor: pointer;
     }
     
     
