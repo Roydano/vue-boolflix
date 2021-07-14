@@ -43,7 +43,7 @@ export default{
           }
       }
 
-      //! METODODI CHIAMATA AXIOS CHE COMPRENDE PIU' CHIAMATE
+      //! METODODI CHIAMATA AXIOS CHE COMPRENDE PIU'
       axios
         .all([
           axios.get(this.urlApiMovie, params),
