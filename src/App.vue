@@ -22,7 +22,7 @@ export default{
 
   data(){
     return{
-      urlApi: 'https://api.themoviedb.org/3/search/movie?',
+      urlApiMovie: 'https://api.themoviedb.org/3/search/movie?',
       urlApiSeries: 'https://api.themoviedb.org/3/search/tv?',
       movieArray:[],
       seriesArray:[],
@@ -35,44 +35,70 @@ export default{
 
     getMovie(searchText){
       this.textSearch = searchText
-
-      // chiamata film
-      axios
-        .get(this.urlApi, {
-          params:{
+      const params = {
+        params:{
             api_key: 'c81548416aaaa14e591c85d4db9fdc1e',
             language: 'it-IT',
             query: this.textSearch
           }
-        })
-        .then(response => {
-          // console.log(response.data.results);
-          this.movieArray = response.data.results
-          // console.log(this.movieArray);
-        })
-        .catch(error =>{
-          console.log('Errore ', error);
-        })
+      }
 
-      //chiamata serie tv
+      //! METODODI CHIAMATA AXIOS CHE COMPRENDE PIU' CHIAMATE
       axios
-        .get(this.urlApiSeries, {
-          params:{
-            api_key: 'c81548416aaaa14e591c85d4db9fdc1e',
-            language: 'it-IT',
-            query: this.textSearch
-          }
-        })
-        .then(response => {
-          // console.log(response.data.results);
-          this.seriesArray = response.data.results
-          // console.log(this.movieArray);
-        })
-        .catch(error =>{
-          console.log('Errore ', error);
-        })
+        .all([
+          axios.get(this.urlApiMovie, params),
+          axios.get(this.urlApiSeries, params)
+        ])
+        .then(axios.spread((responseMovie, responseSeries) =>{
+          this.movieArray = responseMovie.data.results;
+          this.seriesArray = responseSeries.data.results
+        }))
+        .catch(axios.spread((errorMovie, errorSeries) =>{
+          console.log('Errore ', errorMovie);
+          console.log('Errore ', errorSeries);
 
-        console.log(this.textSearch);
+        }))
+
+
+      //!METODO DI CHIAMATA AXIOS CLASSICO CON DUE CHIAMATE DISTINTE
+      // // FILM CALL
+      // axios
+      //   .get(this.urlApi, {
+      //     params:{
+      //       api_key: 'c81548416aaaa14e591c85d4db9fdc1e',
+      //       language: 'it-IT',
+      //       query: this.textSearch
+      //     }
+      //   })
+      //   .then(response => {
+      //     // console.log(response.data.results);
+      //     this.movieArray = response.data.results
+      //     // console.log(this.movieArray);
+      //   })
+      //   .catch(error =>{
+      //     console.log('Errore ', error);
+      //   })
+
+      // // TV SERIES CALL
+      // axios
+      //   .get(this.urlApiSeries, {
+      //     params:{
+      //       api_key: 'c81548416aaaa14e591c85d4db9fdc1e',
+      //       language: 'it-IT',
+      //       query: this.textSearch
+      //     }
+      //   })
+      //   .then(response => {
+      //     // console.log(response.data.results);
+      //     this.seriesArray = response.data.results
+      //     // console.log(this.movieArray);
+      //   })
+      //   .catch(error =>{
+      //     console.log('Errore ', error);
+      //   })
+
+      //   console.log(this.textSearch);
+
     }
 
   }
