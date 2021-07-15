@@ -1,9 +1,19 @@
 <template>
   <main class="container">
+
         <div v-if="searching == ''">
-            <h2 class="text-center">Titoli del momento</h2>
-            <div class="desk d-flex flex-wrap justify-content-center mb-5">
-                <Card v-for="movie in trendArray" :key="movie.id" :movie="movie" class="p-2"/>
+            <div v-if="idSelect == ''">
+                <h2 class="text-center">Titoli del momento</h2>
+                <div class="desk d-flex flex-wrap justify-content-center mb-5">
+                    <Card v-for="movie in trendArray" :key="movie.id" :movie="movie" class="p-2"/>
+                </div>
+            </div>
+
+            <div v-else>
+                <div v-for="name in genreArray" :key="name.id">
+                   <h2 class="text-center" v-if="name.id == idSelect">{{name.name}}</h2>
+                </div>
+                <span>{{seriesArray}}</span>
             </div>
         </div>
 
@@ -34,12 +44,17 @@ import Card from '@/components/Card.vue';
 
 export default {
     name: 'Main',
-    props:['movieArray', 'seriesArray', 'searching', 'trendArray'],
+    props:['movieArray', 'seriesArray', 'searching', 'trendArray', 'idSelect', 'genreArray'],
+
+    data(){
+        return{
+            filterArray:''
+        }
+    },
 
     components:{
         Card,
     },
-   
 
 }
 </script>
@@ -56,7 +71,9 @@ export default {
         color: rgb(97, 97, 97);
     }
 
-    
+    h1{
+        color: white;
+    }
     
 
     

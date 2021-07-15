@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <Header @search="getMovie"  :genreArray="genreArray"/>
-    <Main :movieArray="movieArray" :seriesArray="seriesArray" :searching="textSearch" :trendArray="trendArray"/>
+    <Header @search="getMovie"  :genreArray="genreArray" @change="changeGenre"/>
+    <Main :movieArray="movieArray" :seriesArray="seriesArray" :searching="textSearch" :trendArray="trendArray" :idSelect="idSelect" :genreArray="genreArray"/>
 
   </div>
 </template>
@@ -28,7 +28,9 @@ export default{
       seriesArray:[],
       trendArray:[],
       genreArray:[],
+      newGenreArray:[],
       textSearch: '',
+      idSelect:''
 
     }
   },
@@ -76,8 +78,6 @@ export default{
         
     },
 
-
-
     getMovie(searchText){
       this.textSearch = searchText
       const params = {
@@ -103,6 +103,8 @@ export default{
           console.log('Errore ', errorSeries);
 
         }))
+
+        console.log(this.genreArraySelect);
 
 
       //!METODO DI CHIAMATA AXIOS CLASSICO CON DUE CHIAMATE DISTINTE
@@ -144,7 +146,14 @@ export default{
 
       //   console.log(this.textSearch);
 
-    }
+    },
+
+    changeGenre(id){
+      this.idSelect = id
+      console.log(this.idSelect);
+      
+    },
+
 
   }
 }

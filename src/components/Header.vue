@@ -1,12 +1,12 @@
 <template>
     <header class="text-center">
-        <h1>Boolflix</h1>
+        <a href="location.reload()"><h1>Boolflix</h1></a>
         <div class="search_bar pb-4">
             <input class="mx-3" type="text" placeholder="Inserisci il titolo di un Film o di una Serie TV..." v-model.trim="textSearch" @keyup.enter="$emit('search', textSearch)">
             <button @click.prevent="$emit('search', textSearch)">Cerca</button>
-            <select class="ms-5 text-center" name="genre" id="genre">
-                <option value="">Seleziona un genere</option>
-                <option v-for="genre in genreArray" :key="genre.id" value="">{{genre.name}}</option>
+            <select class="ms-5 text-center" name="genre" id="genre" v-model="genreSelect" @change="$emit('change', genreSelect)">
+                <option value="">Seleziona genere</option>
+                <option v-for="genre in genreArray" :key="genre.id"  :value="genre.id">{{genre.name}}</option>
             </select>
         </div>
     </header>
@@ -19,9 +19,11 @@ export default {
 
     data(){
         return{
-            textSearch: ''
+            textSearch: '',
+            genreSelect:''
         }
     },
+
 }
 </script>
 
@@ -35,6 +37,8 @@ export default {
             color: red;
             font-size: 50px;
             text-transform: uppercase;
+            display: inline-block;
+            
         }
 
         input{
@@ -64,10 +68,19 @@ export default {
 
         select{
             background-color: black;
-            color: red;
+                        color: rgb(143, 142, 142);
+
             border: none;
             border-bottom: 1px solid red;
             padding: 2px 20px;
+        }
+
+        option{
+            color: red;
+        }
+
+        p{
+            color: white;
         }
     }
 
