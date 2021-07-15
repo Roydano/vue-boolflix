@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Header @search="getMovie"/>
+    <Header @search="getMovie"  :genreArray="genreArray"/>
     <Main :movieArray="movieArray" :seriesArray="seriesArray" :searching="textSearch" :trendArray="trendArray"/>
 
   </div>
@@ -27,6 +27,7 @@ export default{
       movieArray:[],
       seriesArray:[],
       trendArray:[],
+      genreArray:[],
       textSearch: '',
 
     }
@@ -36,6 +37,11 @@ export default{
     this.trendFilm()
   //  console.log(this.trendArray)
     
+  },
+
+  mounted(){
+    this.getGenre()
+    // console.log(this.genreArray);
   },
 
   methods:{
@@ -54,6 +60,23 @@ export default{
 
         
     },
+
+    getGenre(){
+      axios
+        .get('https://api.themoviedb.org/3/genre/movie/list?api_key=c81548416aaaa14e591c85d4db9fdc1e&language=it-IT')
+         .then(response => {
+           // console.log(response.data.results);
+           this.genreArray = response.data.genres
+          //  console.log(this.genreArray);
+         })
+         .catch(error =>{
+           console.log('Errore ', error);
+        })
+
+        
+    },
+
+
 
     getMovie(searchText){
       this.textSearch = searchText
